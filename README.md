@@ -949,7 +949,7 @@ We are so thankful for every contribution, which makes sure we can deliver top-n
 
 **[⬆ Back to Top](#table-of-contents)**
 
-### The release process workflow of an application requires a manual approval before the code is deployed into the production environment. What is the BEST way to achieve this using AWS CodePipeline?
+### The release process workflow of an application requires a manual approval before the code is deployed into the production environment. What is th e BEST way to achieve this using AWS CodePipeline?
 
 - [ ] Use multiple pipelines to allow approval.
 - [x] Use an approval action in a stage.
