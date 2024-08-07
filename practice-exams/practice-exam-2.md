@@ -346,7 +346,6 @@
     </details>
 
 35. A Developer is working on an application that tracks hundreds of millions of product reviews in an Amazon DynamoDB table. The records include the data elements shown in the table. Which field, when used as the partition key, would result in the MOST consistent performance using DynamoDB?
-
 ![Question 87](images/question87.jpg)
 
     - starRating.
@@ -359,7 +358,6 @@
     </details>
 
 36. A development team consists of 10 team members. Similar to a home directory for each team member, the manager wants to grant access to user-specific folders in an Amazon S3 bucket. For the team member with the username 'TeamMemberX', the snippet of the IAM policy looks like this. Instead of creating distinct policies for each team member, what approach can be used to make this policy snippet generic for all team members?
-
 ![Question 88](images/question88.jpg)
 
     - Use IAM policy condition.
