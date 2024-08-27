@@ -11,7 +11,6 @@
       Correct answer: B
     </details>
 
-
  2. A company requires that AWS Lambda functions written by Developers log errors so System Administrators can more effectively troubleshoot issues. What should the Developers implement to meet this need?
     - Publish errors to a dedicated Amazon SQS queue.
     - Create an Amazon CloudWatch Events event trigger based on certain Lambda events.
@@ -21,7 +20,6 @@
     <details markdown=1><summary markdown='span'>Answer</summary>
       Correct answer: B
     </details>
-
 
  3. A Developer is writing an application that runs on Amazon EC2 instances in an Auto Scaling group. The application data is stored in an Amazon DynamoDB table and records are constantly updated by all instances. An instance sometimes retrieves old data. The Developer wants to correct this by making sure the reads are strongly consistent. How can the Developer accomplish this?
     - Set ConsistentRead to true when calling Getltem.
@@ -53,14 +51,27 @@
       Correct answer: B
     </details>
 
- 6. A Developer has an Amazon DynamoDB table that must be in provisioned mode to comply with user requirements. The application needs to support the following: Average item size: 10 KB Item reads each second: 10 strongly consistent Item writes each second: 2 transactional Which read and write capacity cost-effectively meets these requirements?
+ 6. A Developer has an Amazon DynamoDB table that must be in provisioned mode to comply with user requirements. The application needs to support the following:  
+   Average item size: 10 KB  
+   Item reads each second: 10 strongly consistent  
+   Item writes each second: 2 transactional  
+   Which read and write capacity cost-effectively meets these requirements?
     - Read 10; write 2.
     - Read 30; write 40.
     - Use on-demand scaling.
     - Read 300; write 400.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: B
+      Correct answer: B  
+      Reads per item 4KB
+      RCUs needed = 3
+      Read capacity = 3 x 10 = 30 
+
+      Writes per item 1KB
+      WCUs = 1KB x 2 = 2KB
+      Write capacity = 2KB x 10 = 20
+      2 transactional writrs = 20 x 2 = 40
+
     </details>
 
  7. A company wants to containerize an existing three-tier web application and deploy it to Amazon ECS Fargate. The application is using session data to keep track of user activities. Which approach would provide the BEST user experience?
@@ -70,7 +81,17 @@
     - Use an Amazon S3 bucket as data store and save the session data in the bucket.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: C
+      Correct answer: C  
+
+      A is the way to go according to latter link  
+      A: Distributed session management  
+      B: 
+      C: Sticky sessions  
+      D: 
+
+      https://www.awsadvent.com/2016/12/17/session-management-for-web-applications-on-aws-cloud/  
+      https://aws.amazon.com/caching/session-management/  
+      https://www.reddit.com/r/aws/comments/hn5zoe/are_sticky_sessions_the_best_option_for/
     </details>
 
  8. An application is using a single-node Amazon ElastiCache for Redis instance to improve read performance. Over time, demand for the application has increased exponentially, which has increased the load on the ElastiCache instance. It is critical that this cache layer handles the load and is resilient in case of node failures. What can the Developer do to address the load and resiliency requirements?
@@ -80,7 +101,14 @@
     - Vertically scale the ElastiCache instance.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: A
+      Correct answer: A  
+
+      A: Spread reads across nodes. When the primary fails, the primary fails over to a read replica instance.  
+      B: Makes it easy to set up, manage, and scale a distributed in-memory data store  
+      C: Benefits? fast time-to-value, high performance  
+      D: Helps workload traffic  
+
+      https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Replication.html
     </details>
 
  9. A Developer is investigating an application's performance issues. The application consists of hundreds of microservices, and a single API call can potentially have a deep call stack. The Developer must isolate the component that is causing the issue. Which AWS service or feature should the Developer use to gather information about what is happening and isolate the fault?
@@ -90,7 +118,13 @@
     - Amazon Macie.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: A
+      Correct answer: A  
+
+      A: Monitor components and services that make up your cloud applications  
+      B: Capture information about the IP traffic going to and from network interfaces in your VPC  
+      C: GuardDuty is a threat detection service  
+      D: Macie is a fully managed data security and data privacy service  
+      https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html 
     </details>
 
  10. A Company runs continuous integration/continuous delivery (CI/CD) pipelines for its application on AWS CodePipeline. A Developer must write unit tests and run them as part of the pipelines before staging the artifacts for testing. How should the Developer incorporate unit tests as part of CI/CD pipelines?
@@ -101,6 +135,10 @@
 
     <details markdown=1><summary markdown='span'>Answer</summary>
       Correct answer: B
+
+      B: New feature of CodeBuild:  
+      https://aws.amazon.com/pt/blogs/devops/test-reports-with-aws-codebuild/  
+      D: More related to branching strategy rather than running unit test as part of CI/CD pipeline
     </details>
 
  11. An application has the following requirements: Performance efficiency of seconds with up to a minute of latency. The data storage size may grow up to thousands of terabytes. Per-message sizes may vary between 100 KB and 100 MB. Data can be stored as key/value stores supporting eventual consistency. What is the MOST cost-effective AWS service to meet these requirements?
@@ -110,7 +148,11 @@
     - Amazon ElastiCache.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: A
+      Correct answer: A  
+
+      A: Supports key/value and document data models   
+      B: Object storage service  
+      C: Relational database
     </details>
 
  12. A Developer must allow guest users without logins to access an Amazon Cognito-enabled site to view files stored within an Amazon S3 bucket. How should the Developer meet these requirements?
@@ -120,7 +162,11 @@
     - Create a new user pool, disable authentication access, and grant access to AWS resources.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: D
+      Correct answer: D  
+
+      Question is asking about guest users without logins. Therefore we want unauthenticated access.  
+
+      https://docs.aws.amazon.com/location/latest/developerguide/authenticating-using-cognito.html
     </details>
 
  13. A Developer has written code for an application and wants to share it with other Developers on the team to receive feedback. The shared application code needs to be stored long-term with multiple versions and batch change tracking. Which AWS service should the Developer use?
@@ -140,7 +186,11 @@
     - Call the SetQueueAttributes API for the queue and set MaxNumberOfMessages to a value greater than the default of 1.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: C
+      Correct answer: C  
+
+      B: You can't set MaxNumberofMessages with this API   
+      C: Specify the number of messages to receive from the queue (up to 10). Set the maximum number of messages to return  
+      https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html
     </details>
 
  15. A Developer registered an AWS Lambda function as a target for an Application Load Balancer (ALB) using a CLI command. However, the Lambda function is not being invoked when the client sends requests through the ALB. Why is the Lambda function not being invoked?
@@ -150,7 +200,10 @@
     - Cross-zone is not enabled on the ALB.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: C
+      Correct answer: C  
+
+      When registering an AWS Lambda function as a target for an Application Load Balancer (ALB), you need to grant the ALB permission to invoke the Lambda function.  
+      https://docs.amazonaws.cn/en_us/lambda/latest/dg/services-alb.html
     </details>
 
  16. A company provides APIs as a service and commits to a service level agreement (SLA) with all its users. To comply with each SLA, what should the company do?
@@ -160,7 +213,9 @@
     - Enable default throttling limits for each stage after deploying the APIs.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: D
+      Correct answer: D  
+
+      https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html
     </details>
 
  17. A Developer is preparing a deployment package using AWS CloudFormation. The package consists of two separate templates: one for the infrastructure and one for the application. The application has to be inside the VPC that is created from the infrastructure template. How can the application stack refer to the VPC created from the infrastructure template?
@@ -170,7 +225,13 @@
     - Use the Fn::GetAtt function to include the attribute of the VPC in the application template.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: A
+      Correct answer: A  
+
+      A: When you pass the logical ID of this resource to the intrinsic Ref function, Ref returns the ID of the VPC  
+      B: Fn::ImportValue is typically used to create cross-reference stacks  
+      C: DependsOn lets you specify the creation of a resource follows another. Then, a resource is created only after the creation of the resource specified in the DependsOn attribute  
+      D: Returns the value of an attribute from a resource in the template  
+      https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc.html
     </details>
 
  18. A Developer needs to create an application that supports Security Assertion Markup Language (SAML) and Facebook authentication. It must also allow access to AWS services, such as Amazon DynamoDB. Which AWS service or feature will meet these requirements with the LEAST amount of additional coding?
@@ -180,7 +241,12 @@
     - Amazon Lambda@Edge.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: C
+      Correct answer: C  
+
+      B: Provides temporary AWS credentials for users who are guests  
+      C: User directory for web and mobile authentication  
+
+      https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html  
     </details>
 
  19. A Developer is trying to monitor an application's status by running a cron job that returns 1 if the service is up and 0 if the service is down. The Developer created code that uses an AWS CLI put-metric-alarm command to publish the custom metrics to Amazon CloudWatch and create an alarm. However, the Developer is unable to create an alarm as the custom metrics do not appear in the CloudWatch console. What is causing this issue?
@@ -190,7 +256,13 @@
     - The code is not running on an Amazon EC2 instance.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: B
+      Correct answer: B  
+
+      A: Not true
+      B: Publish a single data point for a new or existing metric  
+      C: Unified CloudWatch agent lets you: gather metrics from EC2 instances, collect metrics from on-premises servers, retrieve custom metrics from your services or collect logs from Amazon EC2 instances and on-premises servers  
+
+      https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
     </details>
 
  20. A Developer has written an application that runs on Amazon EC2 instances and generates a value every minute. The Developer wants to monitor and graph the values generated over time without logging in to the instance each time. Which approach should the Developer use to achieve this goal?
@@ -200,7 +272,14 @@
     - Store each value as a variable and add the variable to the list of EC2 metrics that should be reported to the Amazon CloudWatch console.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: C
+      Correct answer: C  
+
+      A: EC2 instances don't report to CloudWatch by default  
+      B: S3 is not for monitoring values  
+      C: We need custom metrics, best answer   
+      D: As A)  
+
+      https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
     </details>
 
  21. A Development team decides to adopt a continuous integration/continuous delivery (CI/CD) process using AWS CodePipeline and AWS CodeCommit for a new application. However, management wants a person to review and approve the code before it is deployed to production. How can the Development team add a manual approver to the CI/CD pipeline?
@@ -210,7 +289,13 @@
     - Add an approval action to the pipeline. Configure the approval action to publish to an Amazon SNS topic when approval is required. The pipeline execution will stop and wait for an approval.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: D
+      Correct answer: D  
+
+      B: Question wants a manual approval  
+      C: Question is asking how to implement approval before deployment to production rather than before updating the codebase. Therefore, approval action in the pipeline is required rather than an approval step in AWS CodeCommit repository.  
+      D: Need one stage for approval in CodePipeline.  
+
+      https://docs.aws.amazon.com/codepipeline/latest/userguide/approvals-action-add.html
     </details>
 
  22. A Developer is building a serverless application using AWS Lambda and must create a REST API using an HTTP GET method. What needs to be defined to meet this requirement? (Choose TWO)
@@ -221,7 +306,12 @@
     - An exposed GET method in Amazon Route 53.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: B, C
+      Correct answer: B, C  
+
+      A: Compute service that lets you execute functions that customize the content that Amazon Cloudfront delivers  
+      B, D: See below resource
+
+      https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html
     </details>
 
  23. A Developer is writing an application in AWS Lambda. To simplify testing and deployments, the Developer needs the database connection string to be easily changed without modifying the Lambda code. How can this requirement be met?
@@ -231,7 +321,10 @@
     - Store the connection string as a Lambda layer.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: A
+      Correct answer: A  
+
+      A: This also gives the opportunity to rotate the credentials  
+      https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html 
     </details>
 
  24. A company is launching an ecommerce website and will host the static data in Amazon S3. The company expects approximately 1,000 transactions per second (TPS) for GET and PUT requests in total. Logging must be enabled to track all requests and must be retained for auditing purposes. What is the MOST cost-effective solution?
@@ -241,7 +334,9 @@
     - Enable S3 server access logging and create a lifecycle policy to move the data to Amazon S3 Glacier in 90 days.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: D
+      Correct answer: D  
+      https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerLogs.html  
+      https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html
     </details>
 
  25. A Developer decides to store highly secure data in Amazon S3 and wants to implement server-side encryption (SSE) with granular control of who can access the master key. Company policy requires that the master key be created, rotated, and disabled easily when needed, all for security reasons. Which solution should be used to meet these requirements?
@@ -251,7 +346,13 @@
     - SSE with customer-provided encryption keys.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: C
+      Correct answer: C  
+
+      A: Best for users who want to ensure their data is encrypted at rest but do not require control over the encryption keys    
+      B: Allows for key rotation, centralized key management, and detailed access control over who can use the keys.  
+      C: Lets you retrieve, manage, and rotate database credentials, application credentials, OAuth tokens, API keys etc. throughout their lifecycles. 
+      D: Encrypt data client-side before uploading it to S3. It's useful when the user wants complete control over the encryption process and keys, using AWS KMS for key management  
+      https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
     </details>
 
  26. A Developer is migrating an on-premises application to AWS. The application currently takes user uploads and saves them to a local directory on the server. All uploads must be saved and made immediately available to all instances in an Auto Scaling group. Which approach will meet these requirements?
