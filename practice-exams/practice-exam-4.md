@@ -453,7 +453,13 @@
     - Use multicast to replicate session information.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: B
+      Correct answer: B  
+
+      C: Use sticky session feature to enable the load balancer to 'stick' a user's session to a target.  
+
+      Key word is blue/green deployment. So a new ALB will be set up and the sticky sessions won't be able to be retained. Therefore, the remaining option is to have an external storage session mechanism. Ans is B.  
+
+      https://quizlet.com/543840606/aws-developer-2020-practice-exam-6-flash-cards/
     </details>
 
  33. A Developer wants to insert a record into an Amazon DynamoDB table as soon as a new file is added to an Amazon S3 bucket. Which set of steps would be necessary to achieve this?
@@ -463,7 +469,16 @@
     - Create a cron job that will run at a scheduled time and insert the records into DynamoDB.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: B
+      Correct answer: B  
+
+      A: S3 can directly invoke an AWS Lambda function, so Cloudwatch is not needed  
+      B: You can configure S3 event notifications to directly invoke a Lambda function  
+      C: Polling S3 bucket for new files is inefficient and unnecessary with S3 event notifications  
+      D: Running a cron job does not occur in real time, so the file would not be immediately inserted into DynamoDB  
+
+      Note: A cron job means scheduling tasks to be completed in future (Linux command)  
+
+      https://docs.aws.amazon.com/AmazonS3/latest/userguide/NotificationHowTo.html 
     </details>
 
  34. A company has implemented AWS CodeDeploy as part of its cloud native CI/CD stack. The company enables automatic rollbacks while deploying a new version of a popular web application from in-place to Amazon EC2. What occurs if the deployment of the new version fails due to code regression?
@@ -473,7 +488,14 @@
     - AWS CodePipeline promotes the most recent deployment with a SUCCEEDED status to production.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: B
+      Correct answer: B  
+
+      A: No mention of Amazon S3  
+      B: No mention of Route 53  
+      C: Rolls back deployment by redeploying a previously deployed version
+      D: See below  
+
+      https://docs.aws.amazon.com/codedeploy/latest/userguide/deployments-rollback-and-redeploy.html
     </details>
 
  35. A Developer uses Amazon S3 buckets for static website hosting. The Developer creates one S3 bucket for the code and another S3 bucket for the assets, such as image and video files. Access is denied when a user attempts to access the assets bucket from the code bucket, with the website application showing a 403 error. How should the Developer solve this issue?
@@ -483,7 +505,12 @@
     - Change the code bucket to use AWS Lambda functions instead of static website hosting.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: B
+      Correct answer: B  
+
+      B: Bucket is set to "Allow"... see example  
+      C: Principals can include accounts, users, roles, federated users, or AWS services. See the example below, Principals is set to "\*"    
+
+      https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteAccessPermissionsReqd.html
     </details>
 
  36. A company has implemented AWS CodePipeline to automate its release pipelines. The Development team is writing an AWS Lambda function what will send notifications for state changes of each of the actions in the stages. Which steps must be taken to associate the Lambda function with the event source?
@@ -493,7 +520,11 @@
     - Create an Amazon CloudWatch Events rule that uses CodePipeline as an event source.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: B
+      Correct answer: D 
+
+      See digital cloud training doc  
+
+      https://aws.amazon.com/about-aws/whats-new/2017/07/amazon-cloudwatch-events-now-supports-aws-codepipeline-as-a-target/
     </details>
 
  37. A Developer has built an application running on AWS Lambda using AWS Serverless Application Model (AWS SAM). What is the correct order of execution to successfully deploy the application?
@@ -503,7 +534,12 @@
     - 1. Build the SAM template locally. 2. Package the SAM template from AWS CodeCommit. 3. Deploy the SAM template to CodeCommit.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: B
+      Correct answer: B  
+
+      A: EBS is not used to store SAM templates  
+      B: Order is correct  
+      C: This suggests deploying the SAM template directly from S3 without first packaging it, which is not a valid option  
+      D: AWS CodeCommit is a managed source control service that is used to store and manage source code, and not SAM templates  
     </details>
 
  38. A company wants to migrate an imaging service to Amazon EC2 while following security best practices. The images are sourced and read from a non-public Amazon S3 bucket. What should a Developer do to meet these requirements?
@@ -513,7 +549,9 @@
     - Create an S3 service role with read-only permissions for the S3 bucket. Attach the role to the EC2 instance.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: C
+      Correct answer: C  
+
+      https://certification.kananinirav.com/aws-developer-associate/practice-exams/practice-exam-5.html
     </details>
 
  39. A Development team wants to immediately build and deploy an application whenever there is a change to the source code. Which approaches could be used to trigger the deployment? (Choose TWO)
@@ -524,7 +562,12 @@
     - Store the source code in an Amazon EC2 instance's ephemeral storage. Configure the instance to start AWS CodePipeline whenever there are changes to the source code.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: B, C
+      Correct answer: A, C  
+
+      B: Encryption and block-store probably not necessary. I'm sure S3 has appropriate security for this.  
+      Ephemeral storage is just temporary storage  
+
+      https://quizlet.com/553532535/aws-et-missed-all-flash-cards/
     </details>
 
  40. An application ingests a large number of small messages and stores them in a database. The application uses AWS Lambda. A Development team is making changes to the application's processing logic. In testing, it is taking more than 15 minutes to process each message. The team is concerned the current backend may time out. Which changes should be made to the backend system to ensure each message is processed in the MOST scalable way?
