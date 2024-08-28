@@ -362,7 +362,14 @@
     - Use Amazon EBS and file synchronization software to achieve eventual consistency among the Auto Scaling group.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: B
+      Correct answer: B  
+
+      A: You've have to reboot the instance  
+      B: Best approach is to have everything in S3. Therefore, any instance spun into the ASG can have access to uploaded data.  
+      C: Instance storage cannot be shared between instances  
+      D: Question wants the uploads to be 'immediately available', implying strong consistency  
+
+      https://aws.amazon.com/blogs/aws/amazon-s3-update-strong-read-after-write-consistency/
     </details>
 
  27. A Developer implemented a static website hosted in Amazon S3 that makes web service requests hosted in Amazon API Gateway and AWS Lambda. The site is showing an error that reads: 'No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'null' is therefore not allowed access.' What should the Developer do to resolve this issue?
@@ -372,7 +379,9 @@
     - Add the Access-Control-Request-Headers header to the request.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: B
+      Correct answer: B  
+
+      https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors.html
     </details>
 
  28. A Developer is building an application that needs to store data in Amazon S3. Management requires that the data be encrypted before it is sent to Amazon S3 for storage. The encryption keys need to be managed by the Security team. Which approach should the Developer take to meet these requirements?
@@ -382,7 +391,14 @@
     - Implement client-side encryption using Amazon S3 managed keys.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: C
+      Correct answer: C  
+
+      Server-side encryption is about protecting data at rest. Server-side encryption encrypts only object data, not the object metadata.   
+
+      Client-side encryption means encrypting your data locally to ensure its security in transit and at rest.  
+
+      A, B ruled out because we need client-side encryption.  
+      C: CMK means KMS. This is 'managed by the security team'  
     </details>
 
  29. A Developer has written an Amazon Kinesis Data Streams application. As usage grows and traffic increases over time, the application is regularly receiving ProvisionedThroughputExceededException error messages. Which steps should the Developer take to resolve the error? (Choose TWO)
@@ -393,7 +409,13 @@
     - Implement exponential backoff on the GetRecords call and the PutRecords call.
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: C, E
+      Correct answer: C, E  
+
+      A: Won't help with error messages  
+      C: Increasing the number of shards in data stream is a best practice.  
+      D: Shard iterator is the initial position to start reading data records sequentially. When a GetShardIterator request is made too often, you receive a ProvisionedThroughputExceededException.   
+      E: Reducing the GetRecords call is recommended. I'm not sure about PutRecords calls.  
+      https://repost.aws/knowledge-center/kinesis-readprovisionedthroughputexceeded
     </details>
 
  30. A Developer is publishing critical log data to a log group in Amazon CloudWatch Logs, which was created 2 months ago. The Developer must encrypt the log data using an AWS KMS customer master key (CMK) so future data can be encrypted to comply with the company's security policy. How can the Developer meet this requirement?
@@ -403,7 +425,15 @@
     - Use the AWS CLI associate-kms-key command and specify the key Amazon Resource Name (ARN)
 
     <details markdown=1><summary markdown='span'>Answer</summary>
-      Correct answer: D
+      Correct answer: D  
+
+      A: Developer must encrypt using a CMK, not AWS  
+      B: You need to associate-kms-key  
+      C: You need to use CloudWatch console to do this  
+      D: See resource  
+      https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/encrypt-log-data-kms.html#associate-cmk  
+
+      C - https://docs.prowler.com/checks/aws/logging-policies/logging_21/
     </details>
 
  31. A Developer has code running on Amazon EC2 instances that needs read-only access to an Amazon DynamoDB table. What is the MOST secure approach the Developer should take to accomplish this task?
